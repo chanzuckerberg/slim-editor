@@ -1,0 +1,43 @@
+/* generated from https://www.layoutit.com/grid */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1.4fr 1.4fr 1.2fr;
+  grid-template-rows: 3fr 0fr 0fr;
+  grid-template-areas: "draft-js-editor slim-editor debug-tool" ". . ." ". . .";
+}
+
+.draft-js-editor { grid-area: draft-js-editor; }
+
+.slim-editor { grid-area: slim-editor; }
+
+.debug-tool { grid-area: debug-tool; }
+
+.btn {
+  margin: 10px;
+}
+
+.debug-text-area {
+  height: 500px;
+  width: 90%;
+}
+
+.draft-js-editor, .slim-editor {
+  background-color: #CFD8DC;
+  border-right: 1px solid black;
+  padding: 20px;
+}
+
+.debug-tool {
+  background-color: #90A4AE;
+  text-align: center;
+}
+
+.DraftEditor-root {
+  background-color: white;
+  height: 100%;
+  padding: 20px;
+}
+
+.grid-container {
+  height: 100vh;
+}
