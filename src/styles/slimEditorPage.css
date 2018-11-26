@@ -1,43 +1,55 @@
 /* generated from https://www.layoutit.com/grid */
 .grid-container {
   display: grid;
-  grid-template-columns: 1.4fr 1.4fr 1.2fr;
-  grid-template-rows: 3fr 0fr 0fr;
-  grid-template-areas: "draft-js-editor slim-editor debug-tool" ". . ." ". . .";
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: "slim-editor slim-editor debug-tool debug-tool" "slim-editor slim-editor debug-tool debug-tool" "slim-editor slim-editor debug-tool debug-tool";
 }
 
-.draft-js-editor { grid-area: draft-js-editor; }
+.slim-editor {
+  grid-area: slim-editor;
+}
 
-.slim-editor { grid-area: slim-editor; }
-
-.debug-tool { grid-area: debug-tool; }
+.debug-tool {
+  grid-area: debug-tool;
+}
 
 .btn {
   margin: 10px;
 }
 
 .debug-text-area {
-  height: 500px;
+  height: 400px;
+  max-height: 400px;
   width: 90%;
 }
 
-.draft-js-editor, .slim-editor {
-  background-color: #CFD8DC;
+.draft-js-editor,
+.slim-editor {
+  background-color: #cfd8dc;
   border-right: 1px solid black;
   padding: 20px;
 }
 
 .debug-tool {
-  background-color: #90A4AE;
+  background-color: #90a4ae;
   text-align: center;
 }
 
-.DraftEditor-root {
+.draft-js-editor > .DraftEditor-root {
   background-color: white;
-  height: 100%;
+  height: 60%;
+  margin: 10px 0;
   padding: 20px;
 }
 
 .grid-container {
   height: 100vh;
+}
+
+.slim-editor textarea {
+  border: none;
+  font-family: monospace;
+  min-height: 500px;
+  width: 100%;
 }

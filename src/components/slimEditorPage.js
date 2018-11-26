@@ -1,9 +1,5 @@
 // @flow
-
-import React from "react";
-import { ButtonGroup, Button } from "react-bootstrap";
 import SlimEditor from "./slimEditor.js";
-import { Editor, EditorState, EditorStateType } from "draft-js";
 
 import { default as uniqueID } from "../utils/uniqueID";
 import convertFromRaw from "../utils/convertFromRaw";
@@ -12,11 +8,19 @@ import noop from "../utils/noop";
 
 import "../styles/slimEditorPage.css";
 
+import { ButtonGroup, Button } from "react-bootstrap";
+import { Editor, EditorState, EditorStateType } from "draft-js";
+import React from "react";
+
 const LOCAL_STORAGE_KEY = "slim-editor-examples";
 
+const SimpleTitle = (props: any) => (
+  <p>
+    <strong>{props.children}</strong>
+  </p>
+);
+
 function getInitialState() {
-  // const runtime = new DemoAppRuntime();
-  // const docsContext = DEFAULT_CONTEXT.merge({canEdit: true, runtime});
   let editorState = EditorState.createEmpty();
   let debugValue = "";
   try {
@@ -30,7 +34,6 @@ function getInitialState() {
   }
   return {
     debugKey: uniqueID(),
-    // docsContext,
     editorState,
     initialEditorState: editorState,
     debugValue,
@@ -57,25 +60,15 @@ export default class SlimEditorPage extends React.Component {
 
   render() {
     const { debugMode, debugValue, debugKey, editorState } = this.state;
+
     return (
       <div className="react-root">
         <div className="grid-container">
-          <div className="draft-js-editor">
-            <p>
-              <strong>Draft JS Editor Output</strong>
-            </p>
-            <Editor
-              editorState={editorState}
-              onChange={st => this.setState({ editorState: st })}
-            />
-          </div>
           <div className="slim-editor">
-            <p>
-              <strong>Semantic Slim Editor Output</strong>
-            </p>
+            <SimpleTitle>Slim Editor HTML</SimpleTitle>
             <SlimEditor
               editorState={editorState}
-              updateState={st => this.setState({ editorState: st })}
+              updateState={editorState => this.setState({ editorState })}
             />
           </div>
           <div className="debug-tool">
@@ -119,17 +112,6 @@ export default class SlimEditorPage extends React.Component {
     this.setState({
       debugValue: debugMode ? JSON.stringify(raw, null, 2) : "",
       editorState: convertFromRaw(raw, editorState)
-    });
-  };
-
-  _onChange = (editorState: Object): void => {
-    const { debugValue, debugMode, debugKey } = this.state;
-    this.setState({
-      editorState,
-      debugKey: debugMode ? uniqueID() : debugKey,
-      debugValue: debugMode
-        ? JSON.stringify(convertToRaw(editorState), null, 2)
-        : debugValue
     });
   };
 
