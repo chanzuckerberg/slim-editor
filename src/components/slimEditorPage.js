@@ -1,4 +1,6 @@
 // @flow
+import DocsConfig from "../editor_configuration/DocsConfig.js";
+import DocsDecorator from "../editor_configuration/DocsDecorator";
 import SlimEditor from "./slimEditor.js";
 
 import { default as uniqueID } from "../utils/uniqueID";
@@ -14,6 +16,8 @@ import React from "react";
 
 const LOCAL_STORAGE_KEY = "slim-editor-examples";
 
+DocsConfig.init();
+
 const SimpleTitle = (props: any) => (
   <p>
     <strong>{props.children}</strong>
@@ -21,7 +25,7 @@ const SimpleTitle = (props: any) => (
 );
 
 function getInitialState() {
-  let editorState = EditorState.createEmpty();
+  let editorState = EditorState.createEmpty(DocsDecorator.get());
   let debugValue = "";
   try {
     debugValue = window.localStorage.getItem(LOCAL_STORAGE_KEY) || "";
