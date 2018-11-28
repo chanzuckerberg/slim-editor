@@ -26,7 +26,7 @@
     "classnames": "2.2.3",
     "draft-js": "0.10.5",
     "fbjs": "^0.8.16",
-    "nullthrows": "^1.0.1",
+    "nullthrows": "1.0.0",
     "react": "15.5.4",
     "react-bootstrap": "^0.32.4",
     "react-dom": "15.5.4"

@@ -26,13 +26,13 @@ function _createStructuredListFromDOMElement(
 } {
   const structuredLists = [];
   Array.from(listNode.children).map(listNodeItem => {
-    const depthRegex = nullthrows(listNodeItem.className).match(
+    const depthRegexMatch = nullthrows(listNodeItem.className).match(
       /(?:public\-DraftStyleDefault\-depth)(\d)/
     );
-    if (!depthRegex || depthRegex.length !== 2) {
-      throw "Unexpect DraftJS list representation";
+    if (!depthRegexMatch || depthRegexMatch.length !== 2) {
+      throw new Error("Unexpect DraftJS list representation");
     }
-    const currentDepth = parseInt(depthRegex[1]);
+    const currentDepth = parseInt(depthRegexMatch[1]);
     const lastList = structuredLists[structuredLists.length - 1];
     if (!lastList || lastList.depth !== currentDepth) {
       structuredLists.push({
@@ -57,12 +57,14 @@ function _createDOMElementFromStructuredData(
     const { key } = structuredData;
     const nodes = structuredData.data.map(listWrapper => {
       const listElement = document.createElement(listElementString);
-      listElement.setAttribute("data-level", listWrapper.depth.toString());
+      listElement.setAttribute("data-indent", listWrapper.depth.toString());
       listWrapper.children.forEach(listItemElementContent => {
         const listItemElement = document.createElement("li");
-        if (listItemElementContent.length !== 0) {
-          listItemElement.appendChild(listItemElementContent.item(0));
-        }
+        const frag = document.createDocumentFragment();
+        Array.from(listItemElementContent).forEach(item => {
+          frag.appendChild(item);
+        });
+        listItemElement.appendChild(frag);
         listElement.appendChild(listItemElement);
       });
       return listElement;
