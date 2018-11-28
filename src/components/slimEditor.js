@@ -3,10 +3,13 @@ import { ContentBlockType, Editor } from "draft-js";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { CONTENT_BLOCK_TYPES } from "../_deprecated/draftJSConstants";
+import nullthrows from "nullthrows";
+import { parseLists } from "../utils/sanitizeLists.js";
+
+import type { SerializedListType } from "../utils/sanitizeLists.js";
 
 export default class SlimEditor extends React.PureComponent<any, any, any> {
-  _editorRef: ?HTMLElement;
+  _editorRef: ?React.Element<Editor>;
 
   constructor(props: { editorState: Object, updateState: Function }) {
     super(props);
@@ -20,7 +23,6 @@ export default class SlimEditor extends React.PureComponent<any, any, any> {
           <Editor
             editorState={this.props.editorState}
             onChange={this.props.updateState}
-            blockRendererFn={this.semanticBlockRenderer}
             ref={c => (this._editorRef = c)}
           />
         </div>
@@ -31,11 +33,35 @@ export default class SlimEditor extends React.PureComponent<any, any, any> {
 
   componentDidUpdate = () => {
     if (this._editorRef && this._editorRef.editor) {
+      this.simplifyLists();
+      // $FlowFixMe this type is unknown but is HTMLElement
       this.setState({ html: this._editorRef.editor.innerHTML });
     }
   };
 
-  semanticBlockRenderer = (contentBlock: ContentBlockType) => {
-    // TODO: Render a custom component for lists
+  simplifyLists = () => {
+    if (this._editorRef && this._editorRef.editor) {
+      // $FlowFixMe this type is unknown but is HTMLElement
+      const editor: HTMLElement = nullthrows(this._editorRef.editor);
+      parseLists(editor, "ul").forEach(
+        this._replaceOldListWithProperlyNestedList
+      );
+      parseLists(editor, "ol").forEach(
+        this._replaceOldListWithProperlyNestedList
+      );
+    }
+  };
+
+  _replaceOldListWithProperlyNestedList = (list: SerializedListType) => {
+    const originalListElement = document.querySelector(
+      `.public-DraftStyleDefault-${list.tag}[data-offset-key="${list.key}"]`
+    );
+    if (originalListElement) {
+      const parentNode = nullthrows(originalListElement.parentNode);
+      list.nodes.forEach(node =>
+        parentNode.insertBefore(node, originalListElement)
+      );
+      parentNode.removeChild(originalListElement);
+    }
   };
 }
