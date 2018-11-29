@@ -1,8 +1,10 @@
 // @flow
 
 import React from "react";
+import { ContentBlock, EditorState, Entity } from "draft-js";
+import DocsTableRow from "./docsTableRow.js";
 
-type DocsTableEntityData = {
+export type DocsTableEntityData = {
   cellBgStyles?: ?{ [cellId: string]: string },
   cellColSpans?: ?{ [cellId: string]: number },
   cellRowSpans?: ?{ [cellId: string]: number },
@@ -16,13 +18,41 @@ type DocsTableEntityData = {
   topRowBgStyle?: ?"dark"
 };
 
+type Props = {
+  block: ContentBlock,
+  blockProps: {
+    editorState: EditorState,
+    entity: Entity,
+    entityKey: string
+  }
+};
+
 export default class DocsTable extends React.Component {
+  props: Props;
+
   render() {
+    const { blockProps } = this.props;
+    const { entity, editorState, entityKey } = blockProps;
+    const entityData = entity.getData();
+    const { colsCount, rowsCount, colWidths } = entityData;
+
+    const tableRows = [];
+    let rowIndex = 0;
+    while (rowIndex < rowsCount) {
+      tableRows.push(
+        <DocsTableRow
+          editorState={editorState}
+          entity={entity}
+          entityKey={entityKey}
+          key={"row_" + rowIndex}
+          rowIndex={rowIndex}
+        />
+      );
+      rowIndex++;
+    }
     return (
       <table>
-        <tr>
-          <td>This is a simple custom table.</td>
-        </tr>
+        <tbody>{tableRows}</tbody>
       </table>
     );
   }
