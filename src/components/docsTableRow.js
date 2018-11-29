@@ -6,12 +6,13 @@ import React from "react";
 
 import type { DocsTableEntityData } from "./docsTableBlock.js";
 
-type Props = {
+type Props = {|
+  colWidths: ?Array<number>,
   editorState: EditorState,
   entity: Object,
   entityKey: string,
   rowIndex: number
-};
+|};
 
 function getEntityDataID(rowIndex: number, cellIndex: number): string {
   return "cell_" + rowIndex + "_" + cellIndex;
@@ -21,10 +22,10 @@ export default class DocsTableRow extends React.Component {
   props: Props;
 
   render() {
-    const { entity, rowIndex } = this.props;
+    const { colWidths, entity, rowIndex } = this.props;
 
     const entityData: DocsTableEntityData = entity.getData();
-    const { colsCount, colWidths, rowHeights } = entityData;
+    const { colsCount, rowHeights } = entityData;
     let cellsCount = colsCount;
 
     const tableCells = [];
@@ -39,6 +40,7 @@ export default class DocsTableRow extends React.Component {
         <DocsTableCell
           cellIndex={cc}
           colsCount={colsCount}
+          colWidth={colWidths && colWidths[cc]}
           key={id}
           rawContentState={rawContentState}
           rowIndex={rr}

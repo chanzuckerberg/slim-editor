@@ -4,7 +4,7 @@ import React from "react";
 import { ContentBlock, EditorState, Entity } from "draft-js";
 import DocsTableRow from "./docsTableRow.js";
 
-export type DocsTableEntityData = {
+export type DocsTableEntityData = {|
   cellBgStyles?: ?{ [cellId: string]: string },
   cellColSpans?: ?{ [cellId: string]: number },
   cellRowSpans?: ?{ [cellId: string]: number },
@@ -16,31 +16,41 @@ export type DocsTableEntityData = {
   paddingSize?: ?string,
   rowsCount: number,
   topRowBgStyle?: ?"dark"
-};
+|};
 
-type Props = {
+type Props = {|
   block: ContentBlock,
   blockProps: {
     editorState: EditorState,
+    editorWidth: number,
     entity: Entity,
     entityKey: string
   }
-};
+|};
 
 export default class DocsTable extends React.Component {
   props: Props;
+  state: { containerWidth: number };
+
+  constructor(props: Props) {
+    super(props);
+    this.state = { containerWidth: this.props.blockProps.editorWidth };
+  }
 
   render() {
     const { blockProps } = this.props;
+    const { containerWidth } = this.state;
     const { entity, editorState, entityKey } = blockProps;
     const entityData = entity.getData();
     const { colsCount, rowsCount, colWidths } = entityData;
-
+    const colWidthsInPx =
+      colWidths && colWidths.map(width => Math.round(width * containerWidth));
     const tableRows = [];
     let rowIndex = 0;
     while (rowIndex < rowsCount) {
       tableRows.push(
         <DocsTableRow
+          colWidths={colWidthsInPx}
           editorState={editorState}
           entity={entity}
           entityKey={entityKey}
