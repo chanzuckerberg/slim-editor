@@ -1,8 +1,7 @@
 // @flow
-import { ContentBlock, Editor } from "draft-js";
+import { ContentBlockType, Editor } from "draft-js";
 import React from "react";
 import ReactDOM from "react-dom";
-import SlimEditorBlockRenderer from "../editor_configuration/SlimEditorBlockRenderer.js";
 
 import nullthrows from "nullthrows";
 import { parseLists } from "../utils/sanitizeLists.js";
@@ -22,7 +21,6 @@ export default class SlimEditor extends React.PureComponent<any, any, any> {
       <div>
         <div style={{ display: "none" }}>
           <Editor
-            blockRendererFn={this._renderBlock}
             editorState={this.props.editorState}
             onChange={this.props.updateState}
             ref={c => (this._editorRef = c)}
@@ -38,14 +36,6 @@ export default class SlimEditor extends React.PureComponent<any, any, any> {
       const html = this.simplifyLists();
       html && this.setState({ html });
     }
-  };
-
-  _renderBlock = (contentBlock: ContentBlock): ?Object => {
-    const { editorState } = this.props;
-    const blockProps = {
-      editorState
-    };
-    return SlimEditorBlockRenderer.renderBlock(contentBlock, blockProps);
   };
 
   simplifyLists = (): ?string => {
