@@ -10,8 +10,10 @@ type Props = {|
   cellIndex: number,
   colsCount: number,
   colWidth: ?number,
+  leftColHighlight: boolean,
   rawContentState: ?Object,
-  rowIndex: number
+  rowIndex: number,
+  topRowHighlight: boolean
 |};
 
 function getLocalEditorState(props: Props): EditorState {
@@ -29,25 +31,37 @@ export default class DocsTableCell extends React.Component {
   };
 
   render() {
-    const { cellIndex, colsCount, colWidth, rowIndex } = this.props;
-    if (rowIndex === 0) {
-      const dataColWidthProp =
-        cellIndex !== colsCount - 1 ? { "data-colwidth": colWidth } : {};
+    const {
+      cellIndex,
+      colsCount,
+      colWidth,
+      leftColHighlight,
+      rowIndex,
+      topRowHighlight
+    } = this.props;
+    const isTopRow = rowIndex === 0;
+    const isLeftColumn = cellIndex === 0;
+    const isLastColumn = cellIndex === colsCount - 1;
+    const shouldHighlightCell =
+      (isTopRow && topRowHighlight) || (isLeftColumn && leftColHighlight);
+    const styleProp = shouldHighlightCell ? { backgroundColor: "#efefef" } : {};
+    const editor = (
+      <Editor
+        blockRendererFn={this._renderBlock}
+        editorState={this.state.localEditorState}
+      />
+    );
+
+    if (isTopRow) {
       return (
-        <th {...dataColWidthProp}>
-          <Editor
-            blockRendererFn={this._renderBlock}
-            editorState={this.state.localEditorState}
-          />
+        <th data-colwidth={isLastColumn ? null : colWidth} style={styleProp}>
+          {editor}
         </th>
       );
     }
     return (
-      <td>
-        <Editor
-          blockRendererFn={this._renderBlock}
-          editorState={this.state.localEditorState}
-        />
+      <td data-colwidth={isLastColumn ? null : colWidth} style={styleProp}>
+        {editor}
       </td>
     );
   }

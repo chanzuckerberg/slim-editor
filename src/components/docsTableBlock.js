@@ -41,12 +41,19 @@ export default class DocsTable extends React.Component {
     const { blockProps } = this.props;
     const { containerWidth } = this.state;
     const { entity, editorState, entityKey } = blockProps;
-    const entityData = entity.getData();
-    const { colsCount, rowsCount, colWidths } = entityData;
+    const entityData: DocsTableEntityData = entity.getData();
+    const {
+      colsCount,
+      rowsCount,
+      colWidths,
+      leftColBgStyle,
+      topRowBgStyle
+    } = entityData;
     const colWidthsInPx =
       colWidths && colWidths.map(width => Math.round(width * containerWidth));
     const tableRows = [];
     let rowIndex = 0;
+
     while (rowIndex < rowsCount) {
       tableRows.push(
         <DocsTableRow
@@ -55,7 +62,9 @@ export default class DocsTable extends React.Component {
           entity={entity}
           entityKey={entityKey}
           key={"row_" + rowIndex}
+          leftColHighlight={typeof leftColBgStyle === "string"}
           rowIndex={rowIndex}
+          topRowHighlight={typeof topRowBgStyle === "string"}
         />
       );
       rowIndex++;
