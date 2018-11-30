@@ -1,5 +1,5 @@
 // @flow
-import { ContentBlock, Editor } from "draft-js";
+import { ContentBlock, Editor, EditorState } from "draft-js";
 import React from "react";
 import ReactDOM from "react-dom";
 import SlimEditorBlockRenderer from "../editor_configuration/SlimEditorBlockRenderer.js";
@@ -12,8 +12,8 @@ import type { SerializedListType } from "../utils/sanitizeLists.js";
 const DEFAULT_EDITOR_WIDTH = 696;
 
 type Props = {|
-  editorState: Object,
-  updateState: Function
+  editorState: EditorState,
+  debugMode?: boolean
 |};
 export default class SlimEditor extends React.PureComponent<any, any, any> {
   constructor(props: Props) {
@@ -22,7 +22,11 @@ export default class SlimEditor extends React.PureComponent<any, any, any> {
   }
 
   render() {
-    return <textarea value={this.state.html} />;
+    const { html } = this.state;
+    if (this.props.debugMode) {
+      return <textarea value={html} />;
+    }
+    return <div dangerouslySetInnerHTML={{ __html: html }} />;
   }
 
   componentDidUpdate = (prevProps: Props) => {
@@ -33,7 +37,6 @@ export default class SlimEditor extends React.PureComponent<any, any, any> {
         <Editor
           blockRendererFn={this._renderBlock}
           editorState={this.props.editorState}
-          onChange={this.props.updateState}
         />
       );
 

@@ -70,10 +70,7 @@ export default class SlimEditorPage extends React.Component {
         <div className="grid-container">
           <div className="slim-editor">
             <SimpleTitle>Slim Editor HTML</SimpleTitle>
-            <SlimEditor
-              editorState={editorState}
-              updateState={editorState => this.setState({ editorState })}
-            />
+            <SlimEditor debugMode editorState={editorState} />
           </div>
           <div className="debug-tool">
             <div>
