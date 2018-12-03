@@ -1,7 +1,7 @@
 // @flow
 
-import findEntitiesForType from "../utils/findEntitiesForType.js";
-import { CompositeDecorator } from "draft-js";
+import { CompositeDecorator } from 'draft-js';
+import findEntitiesForType from '../utils/findEntitiesForType.js';
 
 const entries = [];
 
@@ -10,11 +10,11 @@ module.exports = {
   register(decoratorType: string, Component: Function) {
     const strategy = findEntitiesForType.bind(null, decoratorType);
     entries.push({
-      strategy: strategy,
-      component: Component
+      strategy,
+      component: Component,
     });
   },
   get(): CompositeDecorator {
     return new CompositeDecorator(entries);
-  }
+  },
 };

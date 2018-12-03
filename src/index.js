@@ -1,8 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import SlimEditorPage from './components/slimEditorPage.js';
+import convertDraftEditorStateToHTML from './utils/convertDraftEditorStateToHTML';
 
-ReactDOM.render(
-  <SlimEditorPage />,
-  document.getElementById('app')
-);
+module.exports = convertDraftEditorStateToHTML;

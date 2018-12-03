@@ -1,31 +1,45 @@
-const path = require("path");
+const path = require('path');
 
-module.exports = {
-  entry: "./src/index.js",
-  output: {
-    path: path.resolve(__dirname, "./dist/"),
-    filename: "bundle.js"
-  },
-  module: {
-    rules: [
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["env", "react"],
-            plugins: [
-              "transform-class-properties",
-              "transform-object-rest-spread"
-            ]
-          }
-        }
-      },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"]
-      }
-    ]
+function exec(env) {
+  const config = {
+    entry: {
+      app: './src/index.js',
+      demo: './src/demo.js',
+    },
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'devDist'),
+    },
+    module: {
+      rules: [
+        {
+          test: /\.m?js$/,
+          exclude: /(node_modules)/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['env', 'react'],
+              plugins: ['transform-class-properties', 'transform-object-rest-spread'],
+            },
+          },
+        },
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
+        },
+      ],
+    },
+    stats: {
+      colors: true,
+      progress: true,
+    },
+  };
+
+  if (env.NODE_ENV === 'development') {
+    config.devtool = 'eval';
   }
-};
+
+  return config;
+}
+
+module.exports = exec;

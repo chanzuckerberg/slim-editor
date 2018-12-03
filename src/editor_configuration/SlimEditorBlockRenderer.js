@@ -1,10 +1,10 @@
-import DocsBlockTypeToComponent from "./DocsBlockTypeToComponent.js";
-import tryGetEntityAtContentState from "../utils/tryGetEntityAtContentState";
-import React from "react";
-import { ContentBlock } from "draft-js";
+import React from 'react';
+import { ContentBlock } from 'draft-js';
+import DocsBlockTypeToComponent from './DocsBlockTypeToComponent.js';
+import tryGetEntityAtContentState from '../utils/tryGetEntityAtContentState';
 
 type Props = {
-  editorState: EditorState
+  editorState: EditorState,
 };
 
 function renderBlock(contentBlock: ContentBlock, blockProps: Props) {
@@ -12,22 +12,20 @@ function renderBlock(contentBlock: ContentBlock, blockProps: Props) {
   let props;
   let editable;
   switch (contentBlock.getType()) {
-    case "atomic":
+    case 'atomic':
       const contentState = blockProps.editorState.getCurrentContent();
       const entityKey = contentBlock.getEntityAt(0);
       // entity could be `null`.
       // This happens while pasting HTML from external sources and we failed
       // to parse its data.
-      const entity = entityKey
-        ? tryGetEntityAtContentState(contentState, entityKey)
-        : null;
+      const entity = entityKey ? tryGetEntityAtContentState(contentState, entityKey) : null;
       if (entity) {
         component = DocsBlockTypeToComponent.getComponent(entity.getType());
         editable = false;
         props = {
           ...blockProps,
           entity,
-          entityKey
+          entityKey,
         };
       }
       break;
@@ -43,9 +41,9 @@ function renderBlock(contentBlock: ContentBlock, blockProps: Props) {
   return {
     component,
     editable,
-    props
+    props,
   };
 }
 module.exports = {
-  renderBlock
+  renderBlock,
 };

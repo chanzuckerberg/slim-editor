@@ -1,7 +1,7 @@
 // @flow
 
-import keyMirror from "fbjs/lib/keyMirror";
+import keyMirror from 'fbjs/lib/keyMirror';
 
 module.exports = keyMirror({
-  DOCS_TABLE: null
+  DOCS_TABLE: null,
 });

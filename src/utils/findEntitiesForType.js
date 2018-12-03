@@ -1,6 +1,6 @@
 // @flow
 
-import {ContentState, ContentBlock} from 'draft-js';
+import { ContentState, ContentBlock } from 'draft-js';
 
 // Executes a callback for each contiguous range of entities within this
 // ContentBlock.
@@ -10,7 +10,7 @@ function findEntitiesForType(
   callback: Function,
   contentState: ContentState,
 ): void {
-  contentBlock.findEntityRanges(character => {
+  contentBlock.findEntityRanges((character) => {
     const entityKey = character.getEntity();
     if (entityKey === null || entityKey === undefined) {
       return false;

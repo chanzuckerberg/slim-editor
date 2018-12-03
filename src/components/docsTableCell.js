@@ -1,10 +1,12 @@
 // @flow
-import { ContentBlock, Editor, EditorState, Entity } from "draft-js";
-import React from "react";
-import DocsDecorator from "../editor_configuration/DocsDecorator";
-import SlimEditorBlockRenderer from "../editor_configuration/SlimEditorBlockRenderer.js";
+import {
+  ContentBlock, Editor, EditorState, Entity,
+} from 'draft-js';
+import React from 'react';
+import DocsDecorator from '../editor_configuration/DocsDecorator';
+import SlimEditorBlockRenderer from '../editor_configuration/SlimEditorBlockRenderer.js';
 
-import convertFromRaw from "../utils/convertFromRaw";
+import convertFromRaw from '../utils/convertFromRaw';
 
 type Props = {|
   cellIndex: number,
@@ -13,7 +15,7 @@ type Props = {|
   leftColHighlight: boolean,
   rawContentState: ?Object,
   rowIndex: number,
-  topRowHighlight: boolean
+  topRowHighlight: boolean,
 |};
 
 function getLocalEditorState(props: Props): EditorState {
@@ -26,8 +28,8 @@ export default class DocsTableCell extends React.Component {
 
   state = {
     localEditorState: EditorState.set(getLocalEditorState(this.props), {
-      decorator: DocsDecorator.get()
-    })
+      decorator: DocsDecorator.get(),
+    }),
   };
 
   render() {
@@ -37,19 +39,15 @@ export default class DocsTableCell extends React.Component {
       colWidth,
       leftColHighlight,
       rowIndex,
-      topRowHighlight
+      topRowHighlight,
     } = this.props;
     const isTopRow = rowIndex === 0;
     const isLeftColumn = cellIndex === 0;
     const isLastColumn = cellIndex === colsCount - 1;
-    const shouldHighlightCell =
-      (isTopRow && topRowHighlight) || (isLeftColumn && leftColHighlight);
-    const styleProp = shouldHighlightCell ? { backgroundColor: "#efefef" } : {};
+    const shouldHighlightCell = (isTopRow && topRowHighlight) || (isLeftColumn && leftColHighlight);
+    const styleProp = shouldHighlightCell ? { backgroundColor: '#efefef' } : {};
     const editor = (
-      <Editor
-        blockRendererFn={this._renderBlock}
-        editorState={this.state.localEditorState}
-      />
+      <Editor blockRendererFn={this._renderBlock} editorState={this.state.localEditorState} />
     );
 
     if (isTopRow) {
@@ -69,7 +67,7 @@ export default class DocsTableCell extends React.Component {
   _renderBlock = (contentBlock: ContentBlock): ?Object => {
     const blockProps = {
       editorState: this.state.localEditorState,
-      editorWidth: this.props.colWidth
+      editorWidth: this.props.colWidth,
     };
     return SlimEditorBlockRenderer.renderBlock(contentBlock, blockProps);
   };

@@ -10,7 +10,7 @@ function randomStr(range: number): string {
 
 // This prefix should ensure that id is unique across multiple
 // web pages and sessions.
-const ID_PREFIX = 'id-' + randomStr(9999) + '-' + Date.now().toString(36) + '-';
+const ID_PREFIX = `id-${randomStr(9999)}-${Date.now().toString(36)}-`;
 
 let seed = 0;
 

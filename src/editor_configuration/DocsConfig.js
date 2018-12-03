@@ -1,22 +1,22 @@
 // @flow
-import DocsBlockTypes from "./DocsBlockTypes.js";
-import DocsBlockTypeToComponent from "./DocsBlockTypeToComponent.js";
-import DocsDecorator from "./DocsDecorator.js";
-import DocsImageDecorator from "../components/docsImageDecorator.js";
-import DocsLinkDecorator from "../components/docsLinkDecorator.js";
-import DocsMathDecorator from "../components/docsMathDecorator.js";
-import DocsTable from "../components/docsTableBlock.js";
-import DocsDecoratorTypes from "./DocsDecoratorTypes";
+import DocsBlockTypes from './DocsBlockTypes.js';
+import DocsBlockTypeToComponent from './DocsBlockTypeToComponent.js';
+import DocsDecorator from './DocsDecorator.js';
+import DocsImageDecorator from '../components/docsImageDecorator.js';
+import DocsLinkDecorator from '../components/docsLinkDecorator.js';
+import DocsMathDecorator from '../components/docsMathDecorator.js';
+import DocsTable from '../components/docsTableBlock.js';
+import DocsDecoratorTypes from './DocsDecoratorTypes';
 
 function registerCustomBlocks(specs: Array<Array<any>>): void {
-  specs.forEach(spec => {
+  specs.forEach((spec) => {
     const [type, view] = spec;
     DocsBlockTypeToComponent.register(type, view);
   });
 }
 
 function registerDecorator(specs: Array<Array<any>>): void {
-  specs.forEach(spec => {
+  specs.forEach((spec) => {
     const [type, view] = spec;
     DocsDecorator.register(type, view);
   });
@@ -32,5 +32,5 @@ function init(): void {
 }
 
 module.exports = {
-  init
+  init,
 };

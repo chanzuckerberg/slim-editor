@@ -1,8 +1,8 @@
 // @flow
 
-import React from "react";
-import { ContentBlock, EditorState, Entity } from "draft-js";
-import DocsTableRow from "./docsTableRow.js";
+import React from 'react';
+import { ContentBlock, EditorState, Entity } from 'draft-js';
+import DocsTableRow from './docsTableRow.js';
 
 export type DocsTableEntityData = {|
   cellBgStyles?: ?{ [cellId: string]: string },
@@ -15,7 +15,7 @@ export type DocsTableEntityData = {|
   noBorders?: ?boolean,
   paddingSize?: ?string,
   rowsCount: number,
-  topRowBgStyle?: ?"dark"
+  topRowBgStyle?: ?'dark',
 |};
 
 type Props = {|
@@ -24,12 +24,13 @@ type Props = {|
     editorState: EditorState,
     editorWidth: number,
     entity: Entity,
-    entityKey: string
-  }
+    entityKey: string,
+  },
 |};
 
 export default class DocsTable extends React.Component {
   props: Props;
+
   state: { containerWidth: number };
 
   constructor(props: Props) {
@@ -43,14 +44,9 @@ export default class DocsTable extends React.Component {
     const { entity, editorState, entityKey } = blockProps;
     const entityData: DocsTableEntityData = entity.getData();
     const {
-      colsCount,
-      rowsCount,
-      colWidths,
-      leftColBgStyle,
-      topRowBgStyle
+      colsCount, rowsCount, colWidths, leftColBgStyle, topRowBgStyle,
     } = entityData;
-    const colWidthsInPx =
-      colWidths && colWidths.map(width => Math.round(width * containerWidth));
+    const colWidthsInPx = colWidths && colWidths.map(width => Math.round(width * containerWidth));
     const tableRows = [];
     let rowIndex = 0;
 
@@ -61,11 +57,11 @@ export default class DocsTable extends React.Component {
           editorState={editorState}
           entity={entity}
           entityKey={entityKey}
-          key={"row_" + rowIndex}
-          leftColHighlight={typeof leftColBgStyle === "string"}
+          key={`row_${rowIndex}`}
+          leftColHighlight={typeof leftColBgStyle === 'string'}
           rowIndex={rowIndex}
-          topRowHighlight={typeof topRowBgStyle === "string"}
-        />
+          topRowHighlight={typeof topRowBgStyle === 'string'}
+        />,
       );
       rowIndex++;
     }

@@ -1,7 +1,7 @@
 // @flow
 
-import invariant from "invariant";
-import nullthrows from "nullthrows";
+import invariant from 'invariant';
+import nullthrows from 'nullthrows';
 
 const globalMapping: Map<string, Function> = new Map();
 const componentMapping: Map<string, Function> = new Map();
@@ -15,8 +15,8 @@ function _getComponent(blockType: string): Function {
 }
 
 function register(type: string, Component: Function): void {
-  invariant(type && typeof type === "string", "invalid type %s", type);
-  invariant(Component && typeof Component === "function", "invalid Component");
+  invariant(type && typeof type === 'string', 'invalid type %s', type);
+  invariant(Component && typeof Component === 'function', 'invalid Component');
   globalMapping.set(type, Component);
 }
 
@@ -26,5 +26,5 @@ function getComponent(blockType: string): ?Function {
 
 module.exports = {
   getComponent,
-  register
+  register,
 };

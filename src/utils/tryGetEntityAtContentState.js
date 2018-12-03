@@ -1,11 +1,8 @@
 // @flow
 
-import { ContentState, Entity } from "draft-js";
+import { ContentState, Entity } from 'draft-js';
 
-function tryGetEntityAtContentState(
-  contentState: ContentState,
-  entityKey: string
-): ?Entity {
+function tryGetEntityAtContentState(contentState: ContentState, entityKey: string): ?Entity {
   try {
     return contentState.getEntity(entityKey);
   } catch (ex) {

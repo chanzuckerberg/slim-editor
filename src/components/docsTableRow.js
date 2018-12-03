@@ -1,10 +1,10 @@
 // @flow
-import { ContentBlock, EditorState, Entity } from "draft-js";
-import DocsTableCell from "./docsTableCell.js";
+import { ContentBlock, EditorState, Entity } from 'draft-js';
+import React from 'react';
+import DocsTableCell from './docsTableCell.js';
 
-import React from "react";
 
-import type { DocsTableEntityData } from "./docsTableBlock.js";
+import type { DocsTableEntityData } from './docsTableBlock.js';
 
 type Props = {|
   colWidths: ?Array<number>,
@@ -13,11 +13,11 @@ type Props = {|
   entityKey: string,
   leftColHighlight: boolean,
   rowIndex: number,
-  topRowHighlight: boolean
+  topRowHighlight: boolean,
 |};
 
 function getEntityDataID(rowIndex: number, cellIndex: number): string {
-  return "cell_" + rowIndex + "_" + cellIndex;
+  return `cell_${rowIndex}_${cellIndex}`;
 }
 
 export default class DocsTableRow extends React.Component {
@@ -25,16 +25,12 @@ export default class DocsTableRow extends React.Component {
 
   render() {
     const {
-      colWidths,
-      entity,
-      leftColHighlight,
-      rowIndex,
-      topRowHighlight
+      colWidths, entity, leftColHighlight, rowIndex, topRowHighlight,
     } = this.props;
 
     const entityData: DocsTableEntityData = entity.getData();
     const { colsCount, rowHeights } = entityData;
-    let cellsCount = colsCount;
+    const cellsCount = colsCount;
 
     const tableCells = [];
 
@@ -54,7 +50,7 @@ export default class DocsTableRow extends React.Component {
           rawContentState={rawContentState}
           rowIndex={rr}
           topRowHighlight={topRowHighlight}
-        />
+        />,
       );
       cc++;
     }
