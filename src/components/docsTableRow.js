@@ -11,7 +11,9 @@ type Props = {|
   editorState: EditorState,
   entity: Object,
   entityKey: string,
-  rowIndex: number
+  leftColHighlight: boolean,
+  rowIndex: number,
+  topRowHighlight: boolean
 |};
 
 function getEntityDataID(rowIndex: number, cellIndex: number): string {
@@ -22,7 +24,13 @@ export default class DocsTableRow extends React.Component {
   props: Props;
 
   render() {
-    const { colWidths, entity, rowIndex } = this.props;
+    const {
+      colWidths,
+      entity,
+      leftColHighlight,
+      rowIndex,
+      topRowHighlight
+    } = this.props;
 
     const entityData: DocsTableEntityData = entity.getData();
     const { colsCount, rowHeights } = entityData;
@@ -42,13 +50,14 @@ export default class DocsTableRow extends React.Component {
           colsCount={colsCount}
           colWidth={colWidths && colWidths[cc]}
           key={id}
+          leftColHighlight={leftColHighlight}
           rawContentState={rawContentState}
           rowIndex={rr}
+          topRowHighlight={topRowHighlight}
         />
       );
       cc++;
     }
-    //TODO: do I care about padding size? It should happen on the entire table not here
     return <tr>{tableCells}</tr>;
   }
 }
