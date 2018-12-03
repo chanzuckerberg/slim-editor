@@ -6,12 +6,13 @@ import SlimEditorBlockRenderer from "../editor_configuration/SlimEditorBlockRend
 
 import convertFromRaw from "../utils/convertFromRaw";
 
-type Props = {
+type Props = {|
   cellIndex: number,
   colsCount: number,
+  colWidth: ?number,
   rawContentState: ?Object,
   rowIndex: number
-};
+|};
 
 function getLocalEditorState(props: Props): EditorState {
   const { rawContentState } = props;
@@ -28,7 +29,19 @@ export default class DocsTableCell extends React.Component {
   };
 
   render() {
-    const { cellIndex, rowIndex, colsCount } = this.props;
+    const { cellIndex, colsCount, colWidth, rowIndex } = this.props;
+    if (rowIndex === 0) {
+      const dataColWidthProp =
+        cellIndex !== colsCount - 1 ? { "data-colwidth": colWidth } : {};
+      return (
+        <th {...dataColWidthProp}>
+          <Editor
+            blockRendererFn={this._renderBlock}
+            editorState={this.state.localEditorState}
+          />
+        </th>
+      );
+    }
     return (
       <td>
         <Editor
@@ -41,7 +54,8 @@ export default class DocsTableCell extends React.Component {
 
   _renderBlock = (contentBlock: ContentBlock): ?Object => {
     const blockProps = {
-      editorState: this.state.localEditorState
+      editorState: this.state.localEditorState,
+      editorWidth: this.props.colWidth
     };
     return SlimEditorBlockRenderer.renderBlock(contentBlock, blockProps);
   };

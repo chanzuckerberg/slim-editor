@@ -9,6 +9,8 @@ import { parseLists } from "../utils/sanitizeLists.js";
 
 import type { SerializedListType } from "../utils/sanitizeLists.js";
 
+const DEFAULT_EDITOR_WIDTH = 696;
+
 export default class SlimEditor extends React.PureComponent<any, any, any> {
   _editorRef: ?React.Element<Editor>;
 
@@ -43,7 +45,8 @@ export default class SlimEditor extends React.PureComponent<any, any, any> {
   _renderBlock = (contentBlock: ContentBlock): ?Object => {
     const { editorState } = this.props;
     const blockProps = {
-      editorState
+      editorState,
+      editorWidth: DEFAULT_EDITOR_WIDTH
     };
     return SlimEditorBlockRenderer.renderBlock(contentBlock, blockProps);
   };
