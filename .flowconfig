@@ -11,6 +11,13 @@
 .*/node_modules/postcss-modules-scope/.*
 .*/node_modules/postcss-modules-values/.*
 .*/node_modules/postcss/.*
+.*/node_modules/@babel.*
+.*/node_modules/eslint-plugin-jsx-a11y/.*
+.*/node_modules/eslint/.*
+.*/node_modules/inquirer/.*
+.*/node_modules/prettier-eslint/.*
+
+
 
 [libs]
 ./flow-typed/.*
