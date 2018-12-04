@@ -4,6 +4,7 @@ import DocsDecorator from "../editor_configuration/DocsDecorator";
 import SlimEditor from "./slimEditor.js";
 
 import { default as uniqueID } from "../utils/uniqueID";
+import convertDraftEditorStateToHTML from "../utils/convertDraftEditorStateToHTML"
 import convertFromRaw from "../utils/convertFromRaw";
 import convertToRaw from "../utils/convertToRaw";
 import noop from "../utils/noop";
@@ -11,18 +12,12 @@ import noop from "../utils/noop";
 import "../styles/slimEditorPage.css";
 
 import { ButtonGroup, Button } from "react-bootstrap";
-import { Editor, EditorState, EditorStateType } from "draft-js";
+import { Editor, EditorState } from "draft-js";
 import React from "react";
 
 const LOCAL_STORAGE_KEY = "slim-editor-examples";
 
 DocsConfig.init();
-
-const SimpleTitle = (props: any) => (
-  <p>
-    <strong>{props.children}</strong>
-  </p>
-);
 
 function getInitialState() {
   let editorState = EditorState.createEmpty(DocsDecorator.get());
@@ -49,8 +44,8 @@ type State = {
   debugMode: boolean,
   debugValue: string,
   debugKey: string,
-  editorState: EditorStateType,
-  initialEditorState: EditorStateType
+  editorState: EditorState,
+  initialEditorState: EditorState
 };
 export default class SlimEditorPage extends React.Component {
   state: State;
@@ -69,11 +64,10 @@ export default class SlimEditorPage extends React.Component {
       <div className="react-root">
         <div className="grid-container">
           <div className="slim-editor">
-            <SimpleTitle>Slim Editor HTML</SimpleTitle>
-            <SlimEditor
-              editorState={editorState}
-              updateState={editorState => this.setState({ editorState })}
-            />
+            <p>
+              <strong>Slim Editor HTML</strong>
+            </p>
+            <textarea value={convertDraftEditorStateToHTML(editorState)}></textarea>
           </div>
           <div className="debug-tool">
             <div>
