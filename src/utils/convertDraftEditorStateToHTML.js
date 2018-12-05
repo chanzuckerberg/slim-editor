@@ -16,6 +16,10 @@ export default function convertDraftEditorStateToHTML(data) {
     }
   }
 
+  if (!editorState) {
+    return `<div>${JSON.stringify(data || '')}</div>`;
+  }
+
   const el = document.createElement('div');
   const editor = <SlimEditor editorState={editorState} />;
   ReactDOM.render(editor, el);

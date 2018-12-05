@@ -42,6 +42,10 @@ function convertDraftEditorStateToHTML(data) {
     }
   }
 
+  if (!editorState) {
+    return '<div>' + JSON.stringify(data || '') + '</div>';
+  }
+
   var el = document.createElement('div');
   var editor = _react2.default.createElement(_slimEditor2.default, { editorState: editorState });
   _reactDom2.default.render(editor, el);
