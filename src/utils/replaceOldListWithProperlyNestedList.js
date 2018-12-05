@@ -1,5 +1,7 @@
 import nullthrows from 'nullthrows';
 
+import type { SerializedListType } from './sanitizeLists.js';
+
 export default function replaceOldListWithProperlyNestedList(
   list: SerializedListType,
   editorNode: HTMLElement,

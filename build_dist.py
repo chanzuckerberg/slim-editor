@@ -31,4 +31,5 @@ print(node_command)
 os.system(node_command)
 
 # Copy CSS files.
-os.system('cp src/styles/*.css dist/styles')
+os.system('mkdir dist/styles')
+os.system('cp src/styles/*.css dist/styles/')

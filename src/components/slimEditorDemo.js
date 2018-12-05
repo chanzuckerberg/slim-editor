@@ -1,13 +1,13 @@
 // @flow
 import DocsConfig from '../editor_configuration/DocsConfig.js';
-import DocsDecorator from '../editor_configuration/DocsDecorator';
+import DocsDecorator from '../editor_configuration/DocsDecorator.js';
 import SlimEditor from './slimEditor.js';
 
-import { default as uniqueID } from '../utils/uniqueID';
-import convertDraftEditorStateToHTML from '../utils/convertDraftEditorStateToHTML';
-import convertFromRaw from '../utils/convertFromRaw';
-import convertToRaw from '../utils/convertToRaw';
-import noop from '../utils/noop';
+import { default as uniqueID } from '../utils/uniqueID.js';
+import convertDraftEditorStateToHTML from '../utils/convertDraftEditorStateToHTML.js';
+import convertFromRaw from '../utils/convertFromRaw.js';
+import convertToRaw from '../utils/convertToRaw.js';
+import noop from '../utils/noop.js';
 
 import '../styles/slimEditorPage.css';
 

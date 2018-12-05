@@ -4,9 +4,7 @@ import ReactDOM from 'react-dom';
 import nullthrows from 'nullthrows';
 import SlimEditor from '../components/slimEditor.js';
 
-import simplifyLists from './simplifyLists';
-
-import type { SerializedListType } from './sanitizeLists.js';
+import simplifyLists from './simplifyLists.js';
 
 export default function convertDraftEditorStateToHTML(data) {
   let editorState = null;

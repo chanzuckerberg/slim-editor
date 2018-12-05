@@ -10,7 +10,7 @@ var _DocsConfig = require('../editor_configuration/DocsConfig.js');
 
 var _DocsConfig2 = _interopRequireDefault(_DocsConfig);
 
-var _DocsDecorator = require('../editor_configuration/DocsDecorator');
+var _DocsDecorator = require('../editor_configuration/DocsDecorator.js');
 
 var _DocsDecorator2 = _interopRequireDefault(_DocsDecorator);
 
@@ -18,23 +18,23 @@ var _slimEditor = require('./slimEditor.js');
 
 var _slimEditor2 = _interopRequireDefault(_slimEditor);
 
-var _uniqueID = require('../utils/uniqueID');
+var _uniqueID = require('../utils/uniqueID.js');
 
 var _uniqueID2 = _interopRequireDefault(_uniqueID);
 
-var _convertDraftEditorStateToHTML = require('../utils/convertDraftEditorStateToHTML');
+var _convertDraftEditorStateToHTML = require('../utils/convertDraftEditorStateToHTML.js');
 
 var _convertDraftEditorStateToHTML2 = _interopRequireDefault(_convertDraftEditorStateToHTML);
 
-var _convertFromRaw = require('../utils/convertFromRaw');
+var _convertFromRaw = require('../utils/convertFromRaw.js');
 
 var _convertFromRaw2 = _interopRequireDefault(_convertFromRaw);
 
-var _convertToRaw = require('../utils/convertToRaw');
+var _convertToRaw = require('../utils/convertToRaw.js');
 
 var _convertToRaw2 = _interopRequireDefault(_convertToRaw);
 
-var _noop = require('../utils/noop');
+var _noop = require('../utils/noop.js');
 
 var _noop2 = _interopRequireDefault(_noop);
 
