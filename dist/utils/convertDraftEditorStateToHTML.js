@@ -26,6 +26,10 @@ var _slimEditor = require('../components/slimEditor.js');
 
 var _slimEditor2 = _interopRequireDefault(_slimEditor);
 
+var _convertFromRaw = require('./convertFromRaw.js');
+
+var _convertFromRaw2 = _interopRequireDefault(_convertFromRaw);
+
 var _simplifyLists = require('./simplifyLists.js');
 
 var _simplifyLists2 = _interopRequireDefault(_simplifyLists);
@@ -38,7 +42,7 @@ function convertDraftEditorStateToHTML(data) {
     if (data instanceof _draftJs.EditorState) {
       editorState = data;
     } else {
-      editorState = convertFromRaw(data);
+      editorState = (0, _convertFromRaw2.default)(data);
     }
   }
 
