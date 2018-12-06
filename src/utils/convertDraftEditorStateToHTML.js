@@ -28,7 +28,7 @@ export default function convertDraftEditorStateToHTML(data: Object) {
   }
 
   const el = document.createElement('div');
-  const editor = <div data-editorState={editorState} />;
+  const editor = <SlimEditor editorState={editorState} />;
 
   // TODO: Alex.
   // Calling `ReactDOM.render()` within the rendering life-cycle of

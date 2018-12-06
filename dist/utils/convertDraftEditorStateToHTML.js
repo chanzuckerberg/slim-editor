@@ -56,7 +56,7 @@ function convertDraftEditorStateToHTML(data) {
   }
 
   var el = document.createElement('div');
-  var editor = _react2.default.createElement('div', { 'data-editorState': editorState });
+  var editor = _react2.default.createElement(_slimEditor2.default, { editorState: editorState });
 
   // TODO: Alex.
   // Calling `ReactDOM.render()` within the rendering life-cycle of
