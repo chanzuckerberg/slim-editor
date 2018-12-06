@@ -26,7 +26,7 @@ var _slimEditor = require('../components/slimEditor.js');
 
 var _slimEditor2 = _interopRequireDefault(_slimEditor);
 
-var _convertFromRaw = require(',./convertFromRaw.js');
+var _convertFromRaw = require('./convertFromRaw.js');
 
 var _convertFromRaw2 = _interopRequireDefault(_convertFromRaw);
 
