@@ -1,4 +1,6 @@
 // @flow
+
+import DocsDecorator from '../editor_configuration/DocsDecorator';
 import { convertFromRaw as draftJSConvertFromRaw, EditorState } from 'draft-js';
 
 type ObjectLike = any;
@@ -7,10 +9,11 @@ export default function convertFromRaw(
   rawContentState: ObjectLike,
   editorState?: ?EditorState,
 ): EditorState {
+  const decorator = DocsDecorator.get();
   if (rawContentState !== null && typeof rawContentState === 'object') {
     let contentState;
     try {
-      contentState = draftJSConvertFromRaw(rawContentState);
+      contentState = draftJSConvertFromRaw(rawContentState, decorator);
     } catch (ex) {
       // pass
     }
@@ -21,5 +24,5 @@ export default function convertFromRaw(
         : EditorState.createWithContent(contentState);
     }
   }
-  return EditorState.createEmpty();
+  return EditorState.createEmpty(decorator);
 }
