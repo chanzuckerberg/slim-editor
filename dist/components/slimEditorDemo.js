@@ -66,12 +66,15 @@ function getInitialState() {
   } catch (ex) {
     editorState = {};
   }
+  var html = (0, _convertDraftEditorStateToHTML2.default)(editorState);
   return {
     debugKey: (0, _uniqueID2.default)(),
-    editorState: editorState,
-    initialEditorState: editorState,
+    debugMode: /debug_mode=1/.test(document.cookie),
     debugValue: debugValue,
-    debugMode: /debug_mode=1/.test(document.cookie)
+    editorState: editorState,
+    html: html,
+    initialEditorState: editorState,
+    initialHTML: html
   };
 }
 
@@ -90,9 +93,12 @@ var SlimEditorDemo = function (_React$Component) {
           editorState = _this$state.editorState,
           debugMode = _this$state.debugMode;
 
+      var editorStateNew = (0, _convertFromRaw2.default)(raw, editorState);
+      var html = (0, _convertDraftEditorStateToHTML2.default)(editorStateNew);
       _this.setState({
         debugValue: debugMode ? JSON.stringify(raw, null, 2) : '',
-        editorState: (0, _convertFromRaw2.default)(raw, editorState)
+        editorState: editorStateNew,
+        html: html
       });
     };
 
@@ -112,10 +118,13 @@ var SlimEditorDemo = function (_React$Component) {
     };
 
     _this._reset = function () {
-      var initialEditorState = _this.state.initialEditorState;
+      var _this$state2 = _this.state,
+          initialEditorState = _this$state2.initialEditorState,
+          initialHTML = _this$state2.initialHTML;
 
       _this.setState({
-        editorState: initialEditorState
+        editorState: initialEditorState,
+        html: initialHTML
       });
     };
 
@@ -170,7 +179,8 @@ var SlimEditorDemo = function (_React$Component) {
           debugMode = _state.debugMode,
           debugValue = _state.debugValue,
           debugKey = _state.debugKey,
-          editorState = _state.editorState;
+          editorState = _state.editorState,
+          html = _state.html;
 
 
       return _react2.default.createElement(
@@ -191,7 +201,12 @@ var SlimEditorDemo = function (_React$Component) {
                 'Slim Editor HTML'
               )
             ),
-            _react2.default.createElement('textarea', { value: (0, _convertDraftEditorStateToHTML2.default)(editorState) })
+            _react2.default.createElement('textarea', {
+              value: html,
+              onChange: function onChange() {
+                return null;
+              }
+            })
           ),
           _react2.default.createElement(
             'div',

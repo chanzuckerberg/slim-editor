@@ -28,12 +28,15 @@ function getInitialState() {
   } catch (ex) {
     editorState = {};
   }
+  const html = convertDraftEditorStateToHTML(editorState);
   return {
     debugKey: uniqueID(),
-    editorState,
-    initialEditorState: editorState,
-    debugValue,
     debugMode: /debug_mode=1/.test(document.cookie),
+    debugValue,
+    editorState,
+    html,
+    initialEditorState: editorState,
+    initialHTML: html,
   };
 }
 
@@ -42,6 +45,7 @@ type State = {
   debugValue: string,
   debugKey: string,
   editorState: EditorState,
+  html: string,
   initialEditorState: EditorState,
 };
 export default class SlimEditorDemo extends React.Component {
@@ -56,7 +60,7 @@ export default class SlimEditorDemo extends React.Component {
 
   render() {
     const {
-      debugMode, debugValue, debugKey, editorState,
+      debugMode, debugValue, debugKey, editorState, html,
     } = this.state;
 
     return (
@@ -66,7 +70,10 @@ export default class SlimEditorDemo extends React.Component {
             <p>
               <strong>Slim Editor HTML</strong>
             </p>
-            <textarea value={convertDraftEditorStateToHTML(editorState)} />
+            <textarea
+              value={html}
+              onChange={() => null}
+            />
           </div>
           <div className="debug-tool">
             <div>
@@ -102,9 +109,12 @@ export default class SlimEditorDemo extends React.Component {
 
   applyJSON = (raw: Object): void => {
     const { editorState, debugMode } = this.state;
+    const editorStateNew = convertFromRaw(raw, editorState);
+    const html = convertDraftEditorStateToHTML(editorStateNew);
     this.setState({
       debugValue: debugMode ? JSON.stringify(raw, null, 2) : '',
-      editorState: convertFromRaw(raw, editorState),
+      editorState: editorStateNew,
+      html,
     });
   };
 
@@ -123,9 +133,10 @@ export default class SlimEditorDemo extends React.Component {
   };
 
   _reset = (): void => {
-    const { initialEditorState } = this.state;
+    const { initialEditorState, initialHTML } = this.state;
     this.setState({
       editorState: initialEditorState,
+      html: initialHTML,
     });
   };
 
