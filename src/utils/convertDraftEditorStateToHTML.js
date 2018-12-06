@@ -1,12 +1,15 @@
-import { Editor, EditorState } from 'draft-js';
+// @flow
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import nullthrows from 'nullthrows';
 import SlimEditor from '../components/slimEditor.js';
 import convertFromRaw from './convertFromRaw.js';
+import nullthrows from 'nullthrows';
 import simplifyLists from './simplifyLists.js';
+import { Editor, EditorState } from 'draft-js';
 
-export default function convertDraftEditorStateToHTML(data) {
+export default function convertDraftEditorStateToHTML(data: Object) {
+
   let editorState = null;
   if (data !== null && typeof data === 'object') {
     if (data instanceof EditorState) {

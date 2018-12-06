@@ -1,5 +1,4 @@
 // @flow
-import DocsConfig from '../editor_configuration/DocsConfig.js';
 import DocsDecorator from '../editor_configuration/DocsDecorator.js';
 import SlimEditor from './slimEditor.js';
 
@@ -16,8 +15,6 @@ import { Editor, EditorState } from 'draft-js';
 import React from 'react';
 
 const LOCAL_STORAGE_KEY = 'slim-editor-examples';
-
-DocsConfig.init();
 
 function getInitialState() {
   let editorState = EditorState.createEmpty(DocsDecorator.get());
