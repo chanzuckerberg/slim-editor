@@ -13,7 +13,7 @@ export default function convertFromRaw(
   if (rawContentState !== null && typeof rawContentState === 'object') {
     let contentState;
     try {
-      contentState = draftJSConvertFromRaw(rawContentState, decorator);
+      contentState = draftJSConvertFromRaw(rawContentState);
     } catch (ex) {
       // pass
     }
@@ -21,7 +21,7 @@ export default function convertFromRaw(
     if (contentState) {
       return editorState
         ? EditorState.push(editorState, contentState)
-        : EditorState.createWithContent(contentState);
+        : EditorState.createWithContent(contentState, decorator);
     }
   }
   return EditorState.createEmpty(decorator);

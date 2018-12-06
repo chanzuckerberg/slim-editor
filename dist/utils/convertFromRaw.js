@@ -21,13 +21,13 @@ function convertFromRaw(rawContentState, editorState) {
   if (rawContentState !== null && (typeof rawContentState === 'undefined' ? 'undefined' : _typeof(rawContentState)) === 'object') {
     var contentState = void 0;
     try {
-      contentState = (0, _draftJs.convertFromRaw)(rawContentState, decorator);
+      contentState = (0, _draftJs.convertFromRaw)(rawContentState);
     } catch (ex) {
       // pass
     }
 
     if (contentState) {
-      return editorState ? _draftJs.EditorState.push(editorState, contentState) : _draftJs.EditorState.createWithContent(contentState);
+      return editorState ? _draftJs.EditorState.push(editorState, contentState) : _draftJs.EditorState.createWithContent(contentState, decorator);
     }
   }
   return _draftJs.EditorState.createEmpty(decorator);
