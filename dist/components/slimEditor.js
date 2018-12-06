@@ -16,6 +16,10 @@ var _SlimEditorBlockRenderer = require('../editor_configuration/SlimEditorBlockR
 
 var _SlimEditorBlockRenderer2 = _interopRequireDefault(_SlimEditorBlockRenderer);
 
+var _DocsConfig = require('../editor_configuration/DocsConfig.js');
+
+var _DocsConfig2 = _interopRequireDefault(_DocsConfig);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25,6 +29,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var DEFAULT_EDITOR_WIDTH = 696;
+
+_DocsConfig2.default.init();
 
 var SlimEditor = function (_React$PureComponent) {
   _inherits(SlimEditor, _React$PureComponent);

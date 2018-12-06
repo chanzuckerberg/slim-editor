@@ -8,8 +8,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 exports.default = convertDraftEditorStateToHTML;
 
-var _draftJs = require('draft-js');
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -17,10 +15,6 @@ var _react2 = _interopRequireDefault(_react);
 var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _nullthrows = require('nullthrows');
-
-var _nullthrows2 = _interopRequireDefault(_nullthrows);
 
 var _slimEditor = require('../components/slimEditor.js');
 
@@ -30,13 +24,20 @@ var _convertFromRaw = require('./convertFromRaw.js');
 
 var _convertFromRaw2 = _interopRequireDefault(_convertFromRaw);
 
+var _nullthrows = require('nullthrows');
+
+var _nullthrows2 = _interopRequireDefault(_nullthrows);
+
 var _simplifyLists = require('./simplifyLists.js');
 
 var _simplifyLists2 = _interopRequireDefault(_simplifyLists);
 
+var _draftJs = require('draft-js');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function convertDraftEditorStateToHTML(data) {
+
   var editorState = null;
   if (data !== null && (typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object') {
     if (data instanceof _draftJs.EditorState) {
