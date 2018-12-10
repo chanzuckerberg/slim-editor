@@ -83,13 +83,6 @@ var DocsTableCell = function (_React$Component) {
       var styleProp = shouldHighlightCell ? { backgroundColor: '#efefef' } : {};
       var editor = _react2.default.createElement(_draftJs.Editor, { blockRendererFn: this._renderBlock, editorState: this.state.localEditorState });
 
-      if (isTopRow) {
-        return _react2.default.createElement(
-          'th',
-          { 'data-colwidth': isLastColumn ? null : colWidth, style: styleProp },
-          editor
-        );
-      }
       return _react2.default.createElement(
         'td',
         { 'data-colwidth': isLastColumn ? null : colWidth, style: styleProp },

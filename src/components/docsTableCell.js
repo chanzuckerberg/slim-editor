@@ -50,13 +50,6 @@ export default class DocsTableCell extends React.Component {
       <Editor blockRendererFn={this._renderBlock} editorState={this.state.localEditorState} />
     );
 
-    if (isTopRow) {
-      return (
-        <th data-colwidth={isLastColumn ? null : colWidth} style={styleProp}>
-          {editor}
-        </th>
-      );
-    }
     return (
       <td data-colwidth={isLastColumn ? null : colWidth} style={styleProp}>
         {editor}
