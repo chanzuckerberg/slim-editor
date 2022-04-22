@@ -44,6 +44,6 @@
     "draft-js": "^0.10.5",
     "fbjs": "^0.8.16",
     "nullthrows": "^1.0.0",
-    "react-bootstrap": "^0.31.5"
+    "react-bootstrap": ">=0.31.5 <1"
   }
 }
